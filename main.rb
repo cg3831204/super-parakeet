@@ -1,15 +1,18 @@
+require "csv"
 require_relative "./lib/source/catalog_item.rb"
 require_relative "./lib/source/barcode.rb"
 require_relative "./lib/merged_catalog.rb"
 require_relative "./lib/product.rb"
 
 class Main
-  def self.run
-    source_catalog_a = Source::CatalogItem.from_raw_data("a")
-    source_barcodes_a = Source::Barcode.from_raw_data("a")
-    source_catalog_b = Source::CatalogItem.from_raw_data("b")
-    source_barcodes_b = Source::Barcode.from_raw_data("b")
+  def self.run(input_path: "./input/")
+    puts "Reading data from source..."
+    source_catalog_a = Source::CatalogItem.from_raw_data(CSV.read("#{input_path}catalogA.csv"))
+    source_barcodes_a = Source::Barcode.from_raw_data(CSV.read("#{input_path}barcodesA.csv"))
+    source_catalog_b = Source::CatalogItem.from_raw_data(CSV.read("#{input_path}catalogB.csv"))
+    source_barcodes_b = Source::Barcode.from_raw_data(CSV.read("#{input_path}barcodesB.csv"))
 
+    puts "Loading products..."
     products_a = Product.load_products_from_source(
       source_catalog: source_catalog_a,
       source_barcodes: source_barcodes_a,
@@ -22,6 +25,12 @@ class Main
       source_name: "B",
     )
 
-    MergedCatalog.build_csv(products_a + products_b)
+    puts "Creating merged catalog..."
+    merged_catalog_csv = MergedCatalog.build_csv(products_a + products_b)
+
+    puts "Writing merged catalog..."
+    File.write("./output/result_output.csv", merged_catalog_csv)
+
+    puts "Done!"
   end
 end

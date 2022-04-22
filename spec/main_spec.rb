@@ -1,13 +1,24 @@
 require_relative "../main.rb"
 
 RSpec.describe Main do
-  before do
-    allow(Source::CatalogItem).to receive(:from_raw_data)
-    allow(Source::Barcode).to receive(:from_raw_data)
-    allow(Product).to receive(:load_products_from_source).and_return([])
+  let(:expected_output_csv) do
+    <<~CSV
+      SKU,Description,Source
+      999-hello-world,My Product,A
+      111-luffy,zoro,A
+      647-vyk-317,Hello WORLD!,A
+      280-oad-768,Bread - Raisin,A
+      165-rcy-650,Hello WORLD!,A
+      167-eol-949,Cheese - Grana Padano,A
+      650-epd-782,Carbonated Water - Lemon Lime,A
+      999-hello-world,My Product,B
+      999-eol-949,Cheese - Grana Padano,B
+      999-epd-782,Carbonated Water - Lemon Lime,B
+    CSV
   end
 
-  it "does something" do
-    expect(described_class.run).to eq("SKU,Description,Source\n")
+  it "writes the expected output CSV for the provided input CSVs" do
+    expect(File).to receive(:write).with("./output/result_output.csv", expected_output_csv)
+    described_class.run(input_path: "./spec/input/")
   end
 end
