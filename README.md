@@ -28,8 +28,12 @@ In short, we read in data from `input/` and write a merged catalog to `output/re
 
 ## Running the application
 
-`bundle exec rake`
+`bundle exec rake` - this will write to `output/result_output.csv`
 
 ## Running tests
 
-`bundle exec rake test`
+`bundle exec rspec [path]`
+
+### Examples
+- `bundle exec rspec` - runs all tests
+- `bundle exec rspec spec/main_spec.rb` - runs only `main_spec.rb`
