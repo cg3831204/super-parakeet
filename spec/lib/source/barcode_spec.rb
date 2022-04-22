@@ -4,9 +4,9 @@ RSpec.describe Source::Barcode do
   describe ".from_raw_data" do
     let(:raw_data) do
       [
-        ["SKU", "Barcode"],
-        ["sku1", "barcode1"],
-        ["sku2", "barcode2"],
+        ["SupplierID", "SKU", "Barcode"],
+        ["1", "sku1", "barcode1"],
+        ["2", "sku2", "barcode2"],
       ]
     end
 
