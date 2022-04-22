@@ -28,8 +28,7 @@ In short, we read in data from `input/` and write a merged catalog to `output/re
 
 ## Running the application
 
-`bundle exec rake` - this will write to `output/result_output.csv`. there is already an empty
-file here so that we don't have to create the directory
+`bundle exec rake` - this will write to `output/result_output.csv`
 
 ## Running tests
 

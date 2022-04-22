@@ -1,4 +1,5 @@
 require "csv"
+require "fileutils"
 require_relative "./lib/source/catalog_item.rb"
 require_relative "./lib/source/barcode.rb"
 require_relative "./lib/merged_catalog.rb"
@@ -29,6 +30,7 @@ class Main
     merged_catalog_csv = MergedCatalog.build_csv(products_a + products_b)
 
     puts "Writing merged catalog..."
+    FileUtils.mkdir_p("./output/")
     File.write("./output/result_output.csv", merged_catalog_csv)
 
     puts "Done!"

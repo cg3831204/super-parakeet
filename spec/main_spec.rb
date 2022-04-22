@@ -18,6 +18,7 @@ RSpec.describe Main do
   end
 
   it "writes the expected output CSV for the provided input CSVs" do
+    expect(FileUtils).to receive(:mkdir_p).with("./output/")
     expect(File).to receive(:write).with("./output/result_output.csv", expected_output_csv)
     described_class.run(input_path: "./spec/input/")
   end
