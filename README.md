@@ -6,6 +6,11 @@ See [the problem statement](https://github.com/tosumitagrawal/codingskills).
 
 In short, we read in data from `input/` and write a merged catalog to `output/result_output.csv`.
 
+### Assumptions
+
+- When a product exists in both catalogs, we should use Company A's description.
+- We do not need to parse the supplier CSV because it is not required to produce the correct output.
+
 ## Setup
 
 ### Prerequisites
