@@ -5,10 +5,10 @@ require_relative "./lib/product.rb"
 
 class Main
   def self.run
-    catalog_a = Source::CatalogItem.from_csv("a")
-    barcodes_a = Source::Barcode.from_csv("a")
-    catalog_b = Source::CatalogItem.from_csv("b")
-    barcodes_b = Source::Barcode.from_csv("b")
+    catalog_a = Source::CatalogItem.from_raw_data("a")
+    barcodes_a = Source::Barcode.from_raw_data("a")
+    catalog_b = Source::CatalogItem.from_raw_data("b")
+    barcodes_b = Source::Barcode.from_raw_data("b")
 
     products_a = Product.load_products_from_source(
       source_catalog: catalog_a,

@@ -11,7 +11,7 @@ In short, we read in data from `input/` and write a merged catalog to `output/re
 - A single company's catalog will not contain duplicate products
 - When a product exists in both catalogs, we should use Company A's description
 - We do not need to parse the supplier CSVs because they are not required to produce the correct output
-- Input CSVs are valid
+- If a CSV can be parsed and header row is correct, we assume the rest of the CSV is valid
 
 ## Setup
 
