@@ -1,0 +1,11 @@
+{
+  "editor.tabSize": 2,
+  "rufo.exe": "~/.asdf/shims/rufo",
+  // Unfortunately the solargraph extension doesn't support referencing your home 
+  // directory like "~/.asdf/shims/solargraph", so you'll have to set up that yourself.
+  // It should look like this:
+  // "solargraph.commandPath": "/home/yourusername/.asdf/shims/solargraph"
+  "[ruby]": {
+    "editor.formatOnSave": true,
+  },
+}
