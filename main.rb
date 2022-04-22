@@ -1,6 +1,7 @@
 require_relative "./lib/source/catalog_item.rb"
 require_relative "./lib/source/barcode.rb"
-require_relative "./lib/product_list.rb"
+require_relative "./lib/merged_catalog.rb"
+require_relative "./lib/product.rb"
 
 class Main
   def self.run
@@ -9,17 +10,18 @@ class Main
     catalog_b = Source::CatalogItem.from_csv("b")
     barcodes_b = Source::Barcode.from_csv("b")
 
-    product_list_a = ProductList.build(
+    products_a = Product.load_products_from_source(
       source_catalog: catalog_a,
       source_barcodes: barcodes_a,
+      source_name: "A",
     )
 
-    product_list_b = ProductList.build(
+    products_b = Product.load_products_from_source(
       source_catalog: catalog_b,
       source_barcodes: barcodes_b,
+      source_name: "B",
     )
 
-    merged_product_list = product_list_a.merge(product_list_b)
-    result = merged_product_list.to_csv
+    MergedCatalog.build_csv(products_a + products_b)
   end
 end
