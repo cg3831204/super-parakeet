@@ -13,9 +13,9 @@ class MergedCatalog
       csv << ["SKU", "Description", "Source"]
 
       products.each do |product|
-        next if product.barcodes.any?(&is_barcode_already_seen)
-        csv << [product.sku, product.description, product.source_name]
+        skip = product.barcodes.any?(&is_barcode_already_seen)
         product.barcodes.each(&mark_barcode_as_already_seen)
+        csv << [product.sku, product.description, product.source_name] unless skip
       end
     end
   end
