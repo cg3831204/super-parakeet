@@ -9,11 +9,18 @@ In short, we read in data from `input/` and write a merged catalog to `output/re
 ### Assumptions
 
 - A single company's catalog will not contain duplicate products
+- No two different products share a barcode, i.e. any barcode is associated with only one product (which may appear in both catalogs)
+  - I believe this is what is meant by:
+    > If any supplier barcode matches for one product of company A with Company B then we can consider that those products as the same.
 - When a product exists in both catalogs, we should use Company A's description
-- We do not need to parse the supplier CSVs because we don't need to know anything about the supplier to produce the merged catalog
-- If a CSV can be parsed and header row is correct, we assume the rest of the CSV is valid
+- We do not need to parse the supplier CSVs because we don't need to know anything about suppliers to produce a merged catalog
+- If a CSV can be parsed and its header row is correct, we assume the rest of the CSV is valid
+- The input CSVs will have referential integrity, e.g. there will not be an SKU in `catalogA.csv` which does not appear in `barcodesA.csv`
+- The output does not need to be sorted in any particular way
 
 ## Setup
+
+Tested on Fedora 35 Workstation and macOS Monterey 12.1
 
 ### Prerequisites
 
@@ -22,9 +29,9 @@ In short, we read in data from `input/` and write a merged catalog to `output/re
 
 ### Steps
 
-1. `asdf install` - installs the ruby version specified in .tool-versions
+1. `asdf install` - installs the ruby version specified in `.tool-versions`
 2. `gem install bundler` - installs [bundler](https://bundler.io/) which manages ruby dependencies (gems)
-3. `bundle install` - installs the gems specified in Gemfile.lock
+3. `bundle install` - installs the gems specified in `Gemfile.lock`
 
 ## Running the application
 
