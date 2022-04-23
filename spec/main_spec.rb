@@ -17,6 +17,11 @@ RSpec.describe Main do
     CSV
   end
 
+  before do
+    # suppress puts
+    allow($stdout).to receive(:puts)
+  end
+
   it "writes the expected output CSV for the provided input CSVs" do
     expect(FileUtils).to receive(:mkdir_p).with("./output/")
     expect(File).to receive(:write).with("./output/result_output.csv", expected_output_csv)
